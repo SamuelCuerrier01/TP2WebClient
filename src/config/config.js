@@ -1,6 +1,7 @@
 const BASE_URL = "http://localhost/api";
 export const API_ENDPOINTS_ATTRACTIONS = {
     getEntries: () => `${BASE_URL}/attractions`,
+    getAllEntries: () => `${BASE_URL}/attractions/all`,
     createEntry: () => `${BASE_URL}/attractions`,
     updateEntry: (id) => `${BASE_URL}/attractions/${id}`,
     deleteEntry: (id) => `${BASE_URL}/attractions/${id}`

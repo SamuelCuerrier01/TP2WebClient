@@ -13,6 +13,7 @@ export default class EvenementController {
         return json.data;
     }
 
+
     static async deleteEvenement(id) {
         const response = await fetch(API_ENDPOINTS_EVENEMENTS.deleteEntry(id), {
             method: "DELETE",
