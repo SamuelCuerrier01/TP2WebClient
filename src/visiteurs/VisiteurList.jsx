@@ -11,11 +11,11 @@ function VisiteurList() {
     useEffect(() => {
         const fetchData = async () => {
             if(id){
-                const data = await EvenementController.getVisiteursByEvenement(id);
-                setVisiteurs(Array.isArray(data) ? data : []);
+                const json = await EvenementController.getVisiteursByEvenement(id);
+                setVisiteurs(Array.isArray(json.data) ? json.data : []);
             } else {
-                const data = await VisiteurController.getVisiteurs();
-                setVisiteurs(Array.isArray(data) ? data : []);
+                const json = await VisiteurController.getVisiteurs();
+                setVisiteurs(Array.isArray(json.data) ? json.data : []);
             }
         };
         fetchData();

@@ -9,8 +9,7 @@ export default class EvenementController {
             headers: { "Content-Type": "application/json" }
         });
         if (!response.ok) throw new Error("Erreur API");
-        const json = await response.json();
-        return json.data;
+        return await response.json();
     }
 
     static async getVisiteursByEvenement(id) {
@@ -19,8 +18,7 @@ export default class EvenementController {
             headers: { "Content-Type": "application/json" }
         });
         if (!response.ok) throw new Error("Erreur API");
-        const json = await response.json();
-        return json.data;
+        return await response.json();
     }
 
     static async getEvenementById(id) {

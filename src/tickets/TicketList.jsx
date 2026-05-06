@@ -8,8 +8,8 @@ function TicketList() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await TicketController.getTickets();
-            setTickets(Array.isArray(data) ? data : []);
+            const json = await TicketController.getTickets();
+            setTickets(Array.isArray(json.data) ? json.data : []);
         };
         fetchData();
     }, []);

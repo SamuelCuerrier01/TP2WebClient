@@ -9,8 +9,7 @@ export default class VisiteurController {
             headers: { "Content-Type": "application/json" }
         });
         if (!response.ok) throw new Error("Erreur API");
-        const json = await response.json();
-        return json.data;
+        return await response.json();
     }
 
 

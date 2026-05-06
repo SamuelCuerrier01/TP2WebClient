@@ -8,8 +8,8 @@ function CategorieList() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await CategorieController.getCategories();
-            setCategories(Array.isArray(data) ? data : []);
+            const json = await CategorieController.getCategories();
+            setCategories(Array.isArray(json.data) ? json.data : []);
         };
         fetchData();
     }, []);

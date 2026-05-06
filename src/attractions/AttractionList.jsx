@@ -11,11 +11,11 @@ function AttractionList() {
     useEffect(() => {
         const fetchData = async () => {
             if(id){
-                const data = await CategorieController.getAttractionByCategory(id);
-                setAttractions(Array.isArray(data) ? data : []);
+                const json = await CategorieController.getAttractionByCategory(id);
+                setAttractions(Array.isArray(json.data) ? json.data : []);
             } else {
-                const data = await AttractionController.getAttractions();
-                setAttractions(Array.isArray(data) ? data : []);
+                const json = await AttractionController.getAttractions();
+                setAttractions(Array.isArray(json.data) ? json.data : []);
             }
 
         };

@@ -11,11 +11,11 @@ function EvenementList() {
     useEffect(() => {
         const fetchData = async () => {
             if (id) {
-                const data = await AttractionController.getEvenementByAttraction(id);
-                setEvenements(Array.isArray(data) ? data : []);
+                const json = await AttractionController.getEvenementByAttraction(id);
+                setEvenements(Array.isArray(json.data) ? json.data : []);
             } else {
-                const data = await EvenementController.getEvenements();
-                setEvenements(Array.isArray(data) ? data : []);
+                const json = await EvenementController.getEvenements();
+                setEvenements(Array.isArray(json.data) ? json.data : []);
             }
         };
         fetchData();
