@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import CategorieController from "./CategorieController.js";
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function CategorieList() {
+    const navigate = useNavigate()
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
@@ -41,7 +42,7 @@ function CategorieList() {
                         </thead>
                         <tbody>
                         {categories.map((c) => (
-                            <tr key={c.id}>
+                            <tr onClick={() => navigate(`/categories/${c.id}`)} key={c.id}>
                                 <td>{c.id}</td>
                                 <td>{c.nom}</td>
                                 <td>{c.nombre_attractions}</td>

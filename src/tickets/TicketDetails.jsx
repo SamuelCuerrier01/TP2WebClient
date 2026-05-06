@@ -39,16 +39,13 @@ function TicketDetails() {
                     ID : {ticket.id}
                 </h2>
                 <h2>
-                    Nom : {ticket.nom}
+                    Nom de l'événement : {ticket.evenement.nom}
                 </h2>
                 <h2>
-                    Date : {ticket.date_ticket}
+                    Date de l'événement : {ticket.evenement.date_evenement}
                 </h2>
                 <h2>
-                    Capacité : {ticket.capacite}
-                </h2>
-                <h2>
-                    Prix : {ticket.prix}
+                    Visiteur : {ticket.visiteur.nom}
                 </h2>
             </div>
             <div>

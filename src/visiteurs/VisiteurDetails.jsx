@@ -42,14 +42,12 @@ function VisiteurDetails() {
                     Nom : {visiteur.nom}
                 </h2>
                 <h2>
-                    Date : {visiteur.date_visiteur}
+                    Email : {visiteur.email}
                 </h2>
                 <h2>
-                    Capacité : {visiteur.capacite}
+                    Date de dernière visite : {visiteur.date_derniere_visite}
                 </h2>
-                <h2>
-                    Prix : {visiteur.prix}
-                </h2>
+
             </div>
             <div>
                 <Link to={`/visiteurs/edit/${visiteur.id}`} state={{ visiteur: visiteur }}>

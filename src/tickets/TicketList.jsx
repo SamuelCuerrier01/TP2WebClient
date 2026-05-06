@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import TicketController from "./TicketController.js";
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function TicketList() {
+    const navigate = useNavigate()
     const [tickets, setTickets] = useState([]);
 
     useEffect(() => {
@@ -42,17 +43,17 @@ function TicketList() {
                         </tr>
                         </thead>
                         <tbody>
-                        {tickets.map((c) => (
-                            <tr key={c.id}>
-                                <td>{c.id}</td>
-                                <td>{c.date_achat}</td>
-                                <td>{c.evenement.nom}</td>
-                                <td>{c.visiteur.nom}</td>
+                        {tickets.map((t) => (
+                            <tr onClick={() => navigate(`/tickets/${t.id}`)} key={t.id}>
+                                <td>{t.id}</td>
+                                <td>{t.date_achat}</td>
+                                <td>{t.evenement.nom}</td>
+                                <td>{t.visiteur.nom}</td>
                                 <td>
-                                    <Link to={`/tickets/edit/${c.id}`} state={{ ticket: c }}>
+                                    <Link to={`/tickets/edit/${t.id}`} state={{ ticket: t }}>
                                         <button>Modifier</button>
                                     </Link>
-                                    <button onClick={() => handleDelete(c.id)} className={'delete-btn'}>Suprimer</button>
+                                    <button onClick={() => handleDelete(t.id)} className={'delete-btn'}>Suprimer</button>
                                 </td>
                             </tr>
                         ))}

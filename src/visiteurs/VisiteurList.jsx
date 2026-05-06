@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import VisiteurController from "./VisiteurController.js";
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function VisiteurList() {
+    const navigate = useNavigate()
     const [visiteurs, setVisiteurs] = useState([]);
 
     useEffect(() => {
@@ -44,7 +45,7 @@ function VisiteurList() {
                         </thead>
                         <tbody>
                         {visiteurs.map((v) => (
-                            <tr key={v.id}>
+                            <tr onClick={() => navigate(`/visiteurs/${v.id}`)} key={v.id}>
                                 <td>{v.id}</td>
                                 <td>{v.nom}</td>
                                 <td>{v.email}</td>

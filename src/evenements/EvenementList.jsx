@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import EvenementController from "./EvenementController.js";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function EvenementList() {
+    const navigate = useNavigate()
     const [evenements, setEvenements] = useState([]);
 
     useEffect(() => {
@@ -45,7 +46,7 @@ function EvenementList() {
                         </thead>
                         <tbody>
                         {evenements.map((e) => (
-                            <tr key={e.id}>
+                            <tr onClick={() => navigate(`/evenements/${e.id}`)} key={e.id}>
                                 <td>{e.id}</td>
                                 <td>{e.nom}</td>
                                 <td>{e.date_evenement}</td>

@@ -13,6 +13,16 @@ export default class TicketController {
         return json.data;
     }
 
+    static async getTicketById(id) {
+        const response = await fetch(API_ENDPOINTS_TICKETS.getEntry(id), {
+            method: "GET",
+            headers: { "Content-Type": "application/json" }
+        });
+        if (!response.ok) throw new Error("Erreur API");
+        const json = await response.json();
+        return json.data;
+    }
+
     static async deleteTicket(id) {
         const response = await fetch(API_ENDPOINTS_TICKETS.deleteEntry(id), {
             method: "DELETE",

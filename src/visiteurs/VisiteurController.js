@@ -13,6 +13,17 @@ export default class VisiteurController {
         return json.data;
     }
 
+
+    static async getVisiteurById(id) {
+        const response = await fetch(API_ENDPOINTS_VISITEURS.getEntry(id), {
+            method: "GET",
+            headers: { "Content-Type": "application/json" }
+        });
+        if (!response.ok) throw new Error("Erreur API");
+        const json = await response.json();
+        return json.data;
+    }
+
     static async deleteVisiteur(id) {
         const response = await fetch(API_ENDPOINTS_VISITEURS.deleteEntry(id), {
             method: "DELETE",
