@@ -55,6 +55,9 @@ function EvenementDetails() {
                 <Link to={`/evenements/edit/${evenement.id}`} state={{ evenement: evenement }}>
                     <button>Modifier</button>
                 </Link>
+                <Link to={`/evenements/${evenement.id}/visiteurs`}>
+                    <button>Voir les visiteurs</button>
+                </Link>
                 <button onClick={() => handleDelete()} className={'delete-btn'}>Suprimer</button>
             </div>
         </>

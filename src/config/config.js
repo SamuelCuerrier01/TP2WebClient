@@ -5,7 +5,8 @@ export const API_ENDPOINTS_ATTRACTIONS = {
     getAllEntries: () => `${BASE_URL}/attractions/all`,
     createEntry: () => `${BASE_URL}/attractions`,
     updateEntry: (id) => `${BASE_URL}/attractions/${id}`,
-    deleteEntry: (id) => `${BASE_URL}/attractions/${id}`
+    deleteEntry: (id) => `${BASE_URL}/attractions/${id}`,
+    getEvenements: (id) => `${BASE_URL}/attractions/${id}/evenements`
 };
 
 export const API_ENDPOINTS_VISITEURS = {
@@ -21,7 +22,8 @@ export const API_ENDPOINTS_CATEGORIES = {
     getEntry: (id) => `${BASE_URL}/categories/${id}`,
     createEntry: () => `${BASE_URL}/categories`,
     updateEntry: (id) => `${BASE_URL}/categories/${id}`,
-    deleteEntry: (id) => `${BASE_URL}/categories/${id}`
+    deleteEntry: (id) => `${BASE_URL}/categories/${id}`,
+    getAttractions: (id) => `${BASE_URL}/categories/${id}/attractions`,
 };
 
 export const API_ENDPOINTS_EVENEMENTS = {
@@ -29,7 +31,8 @@ export const API_ENDPOINTS_EVENEMENTS = {
     getEntry: (id) => `${BASE_URL}/evenements/${id}`,
     createEntry: () => `${BASE_URL}/evenements`,
     updateEntry: (id) => `${BASE_URL}/evenements/${id}`,
-    deleteEntry: (id) => `${BASE_URL}/evenements/${id}`
+    deleteEntry: (id) => `${BASE_URL}/evenements/${id}`,
+    getVisiteurs: (id) => `${BASE_URL}/evenements/${id}/visiteurs`
 };
 
 export const API_ENDPOINTS_TICKETS = {

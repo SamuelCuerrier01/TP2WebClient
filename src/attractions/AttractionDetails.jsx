@@ -55,6 +55,9 @@ function AttractionDetails() {
                 <Link to={`/attractions/edit/${attraction.id}`} state={{ attraction: attraction }}>
                     <button>Modifier</button>
                 </Link>
+                <Link to={`/attractions/${attraction.id}/evenements`}>
+                    <button>Voir les événements</button>
+                </Link>
                 <button onClick={() => handleDelete()} className={'delete-btn'}>Suprimer</button>
             </div>
         </>

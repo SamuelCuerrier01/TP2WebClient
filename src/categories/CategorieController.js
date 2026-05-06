@@ -13,6 +13,17 @@ export default class EvenementController {
         return json.data;
     }
 
+    static async getAttractionByCategory(id) {
+        const response = await fetch(API_ENDPOINTS_CATEGORIES.getAttractions(id), {
+            method: "GET",
+            headers: { "Content-Type": "application/json" }
+        });
+        if (!response.ok) throw new Error("Erreur API");
+        const json = await response.json();
+        return json.data;
+    }
+
+
     static async getCategorieById(id) {
         const response = await fetch(API_ENDPOINTS_CATEGORIES.getEntry(id), {
             method: "GET",

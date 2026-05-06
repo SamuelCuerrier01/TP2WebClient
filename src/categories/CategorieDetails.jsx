@@ -49,6 +49,9 @@ function CategorieDetails() {
                 <Link to={`/categories/edit/${categorie.id}`} state={{ categorie: categorie }}>
                     <button>Modifier</button>
                 </Link>
+                <Link to={`/categories/${categorie.id}/attractions`}>
+                    <button>Voir les attractions</button>
+                </Link>
                 <button onClick={() => handleDelete()} className={'delete-btn'}>Suprimer</button>
             </div>
         </>

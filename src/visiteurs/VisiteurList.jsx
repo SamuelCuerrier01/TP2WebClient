@@ -1,15 +1,22 @@
 import { useEffect, useState } from "react";
 import VisiteurController from "./VisiteurController.js";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
+import EvenementController from "../evenements/EvenementController.js";
 
 function VisiteurList() {
+    const { id } = useParams()
     const navigate = useNavigate()
     const [visiteurs, setVisiteurs] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await VisiteurController.getVisiteurs();
-            setVisiteurs(Array.isArray(data) ? data : []);
+            if(id){
+                const data = await EvenementController.getVisiteursByEvenement(id);
+                setVisiteurs(Array.isArray(data) ? data : []);
+            } else {
+                const data = await VisiteurController.getVisiteurs();
+                setVisiteurs(Array.isArray(data) ? data : []);
+            }
         };
         fetchData();
     }, []);

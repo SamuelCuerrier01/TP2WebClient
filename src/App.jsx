@@ -33,6 +33,7 @@ function App() {
                     <Route path="/attractions/:id" element={<AttractionDetails />} />
                     <Route path="/attractions/edit/:id" element={<AttractionEdit />} />
                     <Route path="/attractions/create" element={<AttractionCreate />} />
+                    <Route path="/attractions/:id/evenements" element={<EvenementList />} />
 
                     <Route path="/visiteurs" element={<VisiteurList />} />
                     <Route path="/visiteurs/:id" element={<VisiteurDetails />} />
@@ -43,11 +44,13 @@ function App() {
                     <Route path="/categories/:id" element={<CategorieDetails />} />
                     <Route path="/categories/edit/:id" element={<CategorieEdit />} />
                     <Route path="/categories/create" element={<CategorieCreate />} />
+                    <Route path="/categories/:id/attractions" element={<AttractionList />} />
 
                     <Route path="/evenements" element={<EvenementList />} />
                     <Route path="/evenements/:id" element={<EvenementDetails />} />
                     <Route path="/evenements/edit/:id" element={<EvenementEdit />} />
                     <Route path="/evenements/create" element={<EvenementCreate />} />
+                    <Route path="/evenements/:id/visiteurs" element={<VisiteurList />} />
 
                     <Route path="/tickets" element={<TicketList />} />
                     <Route path="/tickets/:id" element={<TicketDetails />} />

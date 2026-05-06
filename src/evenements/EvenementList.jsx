@@ -1,15 +1,22 @@
 import { useEffect, useState } from "react";
 import EvenementController from "./EvenementController.js";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
+import AttractionController from "../attractions/AttractionController.js";
 
 function EvenementList() {
+    const {id} = useParams()
     const navigate = useNavigate()
     const [evenements, setEvenements] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await EvenementController.getEvenements();
-            setEvenements(Array.isArray(data) ? data : []);
+            if (id) {
+                const data = await AttractionController.getEvenementByAttraction(id);
+                setEvenements(Array.isArray(data) ? data : []);
+            } else {
+                const data = await EvenementController.getEvenements();
+                setEvenements(Array.isArray(data) ? data : []);
+            }
         };
         fetchData();
     }, []);

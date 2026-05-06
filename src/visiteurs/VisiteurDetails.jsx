@@ -53,6 +53,9 @@ function VisiteurDetails() {
                 <Link to={`/visiteurs/edit/${visiteur.id}`} state={{ visiteur: visiteur }}>
                     <button>Modifier</button>
                 </Link>
+                <Link to={`/visiteurs/edit/${visiteur.id}/evenements`}>
+                    <button>Modifier</button>
+                </Link>
                 <button onClick={() => handleDelete()} className={'delete-btn'}>Suprimer</button>
             </div>
         </>

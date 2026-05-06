@@ -1,15 +1,23 @@
 import { useEffect, useState } from "react";
+import CategorieController from "../categories/CategorieController.js";
 import AttractionController from "./AttractionController.js";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 
 function AttractionList() {
     const navigate = useNavigate()
+    const { id } = useParams()
     const [attractions, setAttractions] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await AttractionController.getAttractions();
-            setAttractions(Array.isArray(data) ? data : []);
+            if(id){
+                const data = await CategorieController.getAttractionByCategory(id);
+                setAttractions(Array.isArray(data) ? data : []);
+            } else {
+                const data = await AttractionController.getAttractions();
+                setAttractions(Array.isArray(data) ? data : []);
+            }
+
         };
         fetchData();
     }, []);
