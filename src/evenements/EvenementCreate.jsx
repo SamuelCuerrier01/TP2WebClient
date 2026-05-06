@@ -9,8 +9,8 @@ function EvenementCreate() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await AttractionController.getAttractions();
-            setAttractions(Array.isArray(data) ? data : []);
+            const json = await AttractionController.getAttractions();
+            setAttractions(Array.isArray(json.data) ? json.data : []);
         };
         fetchData();
     }, []);

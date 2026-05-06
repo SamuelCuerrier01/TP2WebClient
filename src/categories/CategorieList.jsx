@@ -5,11 +5,20 @@ import {Link, useNavigate} from "react-router-dom";
 function CategorieList() {
     const navigate = useNavigate()
     const [categories, setCategories] = useState([]);
+    const [data, setData] = useState()
+
+    async function handlePagination(url){
+        const json = await CategorieController.getCategoriesByPage(url);
+        setCategories(Array.isArray(json.data) ? json.data : []);
+        setData(json);
+        console.log(json)
+    }
 
     useEffect(() => {
         const fetchData = async () => {
             const json = await CategorieController.getCategories();
             setCategories(Array.isArray(json.data) ? json.data : []);
+            setData(json)
         };
         fetchData();
     }, []);
@@ -46,7 +55,7 @@ function CategorieList() {
                                 <td>{c.id}</td>
                                 <td>{c.nom}</td>
                                 <td>{c.nombre_attractions}</td>
-                                <td>
+                                <td onClick={(e) => e.stopPropagation()}>
                                     <Link to={`/categories/edit/${c.id}`} state={{ categorie: c }}>
                                         <button>Modifier</button>
                                     </Link>
@@ -56,6 +65,8 @@ function CategorieList() {
                         ))}
                         </tbody>
                     </table>
+                    <button onClick={() => handlePagination(data.links.prev)}>previous</button>
+                    <button onClick={() => handlePagination(data.links.next)}>next</button>
                 </div>
             </div>
         </>

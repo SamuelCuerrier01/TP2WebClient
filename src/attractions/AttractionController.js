@@ -12,6 +12,15 @@ export default class AttractionController {
         return await response.json();
     }
 
+    static async getAttractionsByPage(url) {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" }
+        });
+        if (!response.ok) throw new Error("Erreur API");
+        return await response.json();
+    }
+
     static async getEvenementByAttraction(id) {
         const response = await fetch(API_ENDPOINTS_ATTRACTIONS.getEvenements(id), {
             method: "GET",

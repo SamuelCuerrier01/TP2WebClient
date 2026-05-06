@@ -7,15 +7,25 @@ function EvenementList() {
     const {id} = useParams()
     const navigate = useNavigate()
     const [evenements, setEvenements] = useState([]);
+    const [data, setData] = useState()
+
+    async function handlePagination(url){
+        const json = await EvenementController.getEvenementsByPage(url);
+        setEvenements(Array.isArray(json.data) ? json.data : []);
+        setData(json);
+        console.log(json)
+    }
 
     useEffect(() => {
         const fetchData = async () => {
             if (id) {
                 const json = await AttractionController.getEvenementByAttraction(id);
                 setEvenements(Array.isArray(json.data) ? json.data : []);
+                setData(json);
             } else {
                 const json = await EvenementController.getEvenements();
                 setEvenements(Array.isArray(json.data) ? json.data : []);
+                setData(json);
             }
         };
         fetchData();
@@ -60,7 +70,7 @@ function EvenementList() {
                                 <td>{e.capacite}</td>
                                 <td>{e.prix}$</td>
                                 <td>{e.attraction.nom}</td>
-                                <td>
+                                <td onClick={(e) => e.stopPropagation()}>
                                     <Link to={`/evenements/edit/${e.id}`} state={{ evenement: e }}>
                                         <button>Modifier</button>
                                     </Link>
@@ -70,6 +80,8 @@ function EvenementList() {
                         ))}
                         </tbody>
                     </table>
+                    <button onClick={() => handlePagination(data.links.prev)}>previous</button>
+                    <button onClick={() => handlePagination(data.links.next)}>next</button>
                 </div>
             </div>
         </>

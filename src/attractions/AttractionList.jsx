@@ -7,15 +7,25 @@ function AttractionList() {
     const navigate = useNavigate()
     const { id } = useParams()
     const [attractions, setAttractions] = useState([]);
+    const [data, setData] = useState()
+
+    async function handlePagination(url){
+        const json = await AttractionController.getAttractionsByPage(url);
+        setAttractions(Array.isArray(json.data) ? json.data : []);
+        setData(json);
+        console.log(json)
+    }
 
     useEffect(() => {
         const fetchData = async () => {
             if(id){
                 const json = await CategorieController.getAttractionByCategory(id);
                 setAttractions(Array.isArray(json.data) ? json.data : []);
+                setData(json);
             } else {
                 const json = await AttractionController.getAttractions();
                 setAttractions(Array.isArray(json.data) ? json.data : []);
+                setData(json);
             }
 
         };
@@ -68,6 +78,8 @@ function AttractionList() {
                         ))}
                         </tbody>
                     </table>
+                    <button onClick={() => handlePagination(data.links.prev)}>previous</button>
+                    <button onClick={() => handlePagination(data.links.next)}>next</button>
                 </div>
             </div>
         </>

@@ -1,15 +1,24 @@
 import { useEffect, useState } from "react";
 import TicketController from "./TicketController.js";
 import {Link, useNavigate} from "react-router-dom";
+import EvenementController from "../evenements/EvenementController.js";
 
 function TicketList() {
     const navigate = useNavigate()
     const [tickets, setTickets] = useState([]);
+    const [data, setData] = useState()
+
+    async function handlePagination(url){
+        const json = await TicketController.getTicketsByPage(url);
+        setTickets(Array.isArray(json.data) ? json.data : []);
+        setData(json);
+    }
 
     useEffect(() => {
         const fetchData = async () => {
             const json = await TicketController.getTickets();
             setTickets(Array.isArray(json.data) ? json.data : []);
+            setData(json);
         };
         fetchData();
     }, []);
@@ -49,7 +58,7 @@ function TicketList() {
                                 <td>{t.date_achat}</td>
                                 <td>{t.evenement.nom}</td>
                                 <td>{t.visiteur.nom}</td>
-                                <td>
+                                <td onClick={(e) => e.stopPropagation()}>
                                     <Link to={`/tickets/edit/${t.id}`} state={{ ticket: t }}>
                                         <button>Modifier</button>
                                     </Link>
@@ -59,6 +68,8 @@ function TicketList() {
                         ))}
                         </tbody>
                     </table>
+                    <button onClick={() => handlePagination(data.links.prev)}>previous</button>
+                    <button onClick={() => handlePagination(data.links.next)}>next</button>
                 </div>
             </div>
         </>

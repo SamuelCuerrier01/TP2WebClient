@@ -11,10 +11,10 @@ function TicketCreate() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const dataEvenements = await EvenementController.getEvenements();
-            setEvenements(Array.isArray(dataEvenements) ? dataEvenements : []);
-            const dataVisiteurs = await VisiteurController.getVisiteurs();
-            setVisiteurs(Array.isArray(dataVisiteurs) ? dataVisiteurs : []);
+            const jsonEvenements = await EvenementController.getEvenements();
+            setEvenements(Array.isArray(jsonEvenements.data) ? jsonEvenements.data : []);
+            const jsonVisiteurs = await VisiteurController.getVisiteurs();
+            setVisiteurs(Array.isArray(jsonVisiteurs.data) ? jsonVisiteurs.data : []);
         };
         fetchData();
     }, []);

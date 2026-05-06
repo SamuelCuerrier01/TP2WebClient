@@ -12,6 +12,15 @@ export default class TicketController {
         return await response.json();
     }
 
+    static async getTicketsByPage(url) {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" }
+        });
+        if (!response.ok) throw new Error("Erreur API");
+        return await response.json();
+    }
+
     static async getTicketById(id) {
         const response = await fetch(API_ENDPOINTS_TICKETS.getEntry(id), {
             method: "GET",

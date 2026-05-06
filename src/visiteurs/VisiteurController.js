@@ -12,6 +12,15 @@ export default class VisiteurController {
         return await response.json();
     }
 
+    static async getVisiteursByPage(url) {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" }
+        });
+        if (!response.ok) throw new Error("Erreur API");
+        return await response.json();
+    }
+
 
     static async getVisiteurById(id) {
         const response = await fetch(API_ENDPOINTS_VISITEURS.getEntry(id), {
