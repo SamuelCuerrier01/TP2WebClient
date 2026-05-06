@@ -1,19 +1,14 @@
 import { useEffect, useState } from "react";
 import EvenementController from "./EvenementController.js";
-import {Link, useNavigate} from "react-router-dom";
-import AttractionController from "../attractions/AttractionController.js";
+import {Link} from "react-router-dom";
 
 function EvenementList() {
-    const navigate = useNavigate();
     const [evenements, setEvenements] = useState([]);
-    const [attractions, setAttractions] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             const data = await EvenementController.getEvenements();
             setEvenements(Array.isArray(data) ? data : []);
-            const dataAttractions = await AttractionController.getAllAtractions();
-            setAttractions(Array.isArray(dataAttractions) ? dataAttractions : []);
         };
         fetchData();
     }, []);
@@ -33,13 +28,6 @@ function EvenementList() {
     return (
         <>
             <Link to={'/evenements/create'}><button>Créer</button></Link>
-
-                <select name="attraction_id" required>
-                    <option value="" disabled selected hidden>Choisir une Option...</option>
-                    {attractions.map((a) => (
-                        <option key={a.id} value={a.id}>{a.nom}</option>
-                    ))}
-                </select>
 
             <div id="main-container">
                 <div id="details-panel">

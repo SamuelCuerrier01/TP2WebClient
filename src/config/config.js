@@ -1,6 +1,7 @@
 const BASE_URL = "http://localhost/api";
 export const API_ENDPOINTS_ATTRACTIONS = {
     getEntries: () => `${BASE_URL}/attractions`,
+    getEntry: (id) => `${BASE_URL}/attractions/${id}`,
     getAllEntries: () => `${BASE_URL}/attractions/all`,
     createEntry: () => `${BASE_URL}/attractions`,
     updateEntry: (id) => `${BASE_URL}/attractions/${id}`,
@@ -9,6 +10,7 @@ export const API_ENDPOINTS_ATTRACTIONS = {
 
 export const API_ENDPOINTS_VISITEURS = {
     getEntries: () => `${BASE_URL}/visiteurs`,
+    getEntry: (id) => `${BASE_URL}/visiteurs/${id}`,
     createEntry: () => `${BASE_URL}/visiteurs`,
     updateEntry: (id) => `${BASE_URL}/visiteurs/${id}`,
     deleteEntry: (id) => `${BASE_URL}/visiteurs/${id}`
@@ -16,6 +18,7 @@ export const API_ENDPOINTS_VISITEURS = {
 
 export const API_ENDPOINTS_CATEGORIES = {
     getEntries: () => `${BASE_URL}/categories`,
+    getEntry: (id) => `${BASE_URL}/categories/${id}`,
     createEntry: () => `${BASE_URL}/categories`,
     updateEntry: (id) => `${BASE_URL}/categories/${id}`,
     deleteEntry: (id) => `${BASE_URL}/categories/${id}`
@@ -23,6 +26,7 @@ export const API_ENDPOINTS_CATEGORIES = {
 
 export const API_ENDPOINTS_EVENEMENTS = {
     getEntries: () => `${BASE_URL}/evenements`,
+    getEntry: (id) => `${BASE_URL}/evenements/${id}`,
     createEntry: () => `${BASE_URL}/evenements`,
     updateEntry: (id) => `${BASE_URL}/evenements/${id}`,
     deleteEntry: (id) => `${BASE_URL}/evenements/${id}`
@@ -30,6 +34,7 @@ export const API_ENDPOINTS_EVENEMENTS = {
 
 export const API_ENDPOINTS_TICKETS = {
     getEntries: () => `${BASE_URL}/tickets`,
+    getEntry: (id) => `${BASE_URL}/tickets/${id}`,
     createEntry: () => `${BASE_URL}/tickets`,
     updateEntry: (id) => `${BASE_URL}/tickets/${id}`,
     deleteEntry: (id) => `${BASE_URL}/tickets/${id}`

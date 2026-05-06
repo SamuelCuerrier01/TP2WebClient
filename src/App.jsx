@@ -6,7 +6,6 @@ import AttractionCreate from "./attractions/AttractionCreate.jsx";
 import VisiteurList from "./visiteurs/VisiteurList.jsx";
 import VisiteurEdit from "./visiteurs/VisiteurEdit.jsx";
 import VisiteurCreate from "./visiteurs/VisiteurCreate.jsx";
-import Index from "./Index.jsx";
 import CategorieList from "./categories/CategorieList.jsx";
 import CategorieEdit from "./categories/CategorieEdit.jsx";
 import CategorieCreate from "./categories/CategorieCreate.jsx";
@@ -16,6 +15,12 @@ import EvenementCreate from "./evenements/EvenementCreate.jsx";
 import TicketList from "./tickets/TicketList.jsx";
 import TicketEdit from "./tickets/TicketEdit.jsx";
 import TicketCreate from "./tickets/TicketCreate.jsx";
+import AttractionDetails from "./attractions/AttractionDetails.jsx";
+import CategorieDetails from "./categories/CategorieDetails.jsx";
+import VisiteurDetails from "./visiteurs/VisiteurDetails.jsx";
+import TicketDetails from "./tickets/TicketDetails.jsx";
+import EvenementDetails from "./evenements/EvenementDetails.jsx";
+import Layout from "./Layout.jsx";
 
 function App() {
 
@@ -23,27 +28,32 @@ function App() {
     <>
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Index/>} />
+                <Route path="/" element={<Layout/>}>
+                    <Route path="/attractions" element={<AttractionList />} />
+                    <Route path="/attractions/:id" element={<AttractionDetails />} />
+                    <Route path="/attractions/edit/:id" element={<AttractionEdit />} />
+                    <Route path="/attractions/create" element={<AttractionCreate />} />
 
-                <Route path="/attractions" element={<AttractionList />} />
-                <Route path="/attractions/edit/:id" element={<AttractionEdit />} />
-                <Route path="/attractions/create" element={<AttractionCreate />} />
+                    <Route path="/visiteurs" element={<VisiteurList />} />
+                    <Route path="/visiteurs/:id" element={<VisiteurDetails />} />
+                    <Route path="/visiteurs/edit/:id" element={<VisiteurEdit />} />
+                    <Route path="/visiteurs/create" element={<VisiteurCreate />} />
 
-                <Route path="/visiteurs" element={<VisiteurList />} />
-                <Route path="/visiteurs/edit/:id" element={<VisiteurEdit />} />
-                <Route path="/visiteurs/create" element={<VisiteurCreate />} />
+                    <Route path="/categories" element={<CategorieList />} />
+                    <Route path="/categories/:id" element={<CategorieDetails />} />
+                    <Route path="/categories/edit/:id" element={<CategorieEdit />} />
+                    <Route path="/categories/create" element={<CategorieCreate />} />
 
-                <Route path="/categories" element={<CategorieList />} />
-                <Route path="/categories/edit/:id" element={<CategorieEdit />} />
-                <Route path="/categories/create" element={<CategorieCreate />} />
+                    <Route path="/evenements" element={<EvenementList />} />
+                    <Route path="/evenements/:id" element={<EvenementDetails />} />
+                    <Route path="/evenements/edit/:id" element={<EvenementEdit />} />
+                    <Route path="/evenements/create" element={<EvenementCreate />} />
 
-                <Route path="/evenements" element={<EvenementList />} />
-                <Route path="/evenements/edit/:id" element={<EvenementEdit />} />
-                <Route path="/evenements/create" element={<EvenementCreate />} />
-
-                <Route path="/tickets" element={<TicketList />} />
-                <Route path="/tickets/edit/:id" element={<TicketEdit />} />
-                <Route path="/tickets/create" element={<TicketCreate />} />
+                    <Route path="/tickets" element={<TicketList />} />
+                    <Route path="/tickets/:id" element={<TicketDetails />} />
+                    <Route path="/tickets/edit/:id" element={<TicketEdit />} />
+                    <Route path="/tickets/create" element={<TicketCreate />} />
+                </Route>
             </Routes>
         </BrowserRouter>
     </>

@@ -13,6 +13,17 @@ export default class AttractionController {
         return json.data;
     }
 
+    static async getAttractionById(id) {
+        const response = await fetch(API_ENDPOINTS_ATTRACTIONS.getEntry(id), {
+            method: "GET",
+            headers: { "Content-Type": "application/json" }
+        });
+        if (!response.ok) throw new Error("Erreur API");
+        const json = await response.json();
+        return json.data;
+    }
+
+
     static async getAllAtractions() {
         const response = await fetch(API_ENDPOINTS_ATTRACTIONS.getAllEntries(), {
             method: "GET",

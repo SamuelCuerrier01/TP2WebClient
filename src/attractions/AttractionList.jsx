@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import AttractionController from "./AttractionController.js";
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function AttractionList() {
+    const navigate = useNavigate()
     const [attractions, setAttractions] = useState([]);
 
     useEffect(() => {
@@ -43,13 +44,13 @@ function AttractionList() {
                         </thead>
                         <tbody>
                         {attractions.map((a) => (
-                            <tr key={a.id}>
+                            <tr onClick={() => navigate(`/attractions/${a.id}`)} key={a.id}>
                                 <td>{a.id}</td>
                                 <td>{a.nom}</td>
                                 <td>{a.adresse}</td>
                                 <td>{a.capacite}</td>
                                 <td>{a.categorie.nom}</td>
-                                <td>
+                                <td onClick={(e) => e.stopPropagation()}>
                                     <Link to={`/attractions/edit/${a.id}`} state={{ attraction: a }}>
                                         <button>Modifier</button>
                                     </Link>
