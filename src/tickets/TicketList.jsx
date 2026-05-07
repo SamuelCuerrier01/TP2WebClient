@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import TicketController from "./TicketController.js";
 import {Link, useNavigate} from "react-router-dom";
-import EvenementController from "../evenements/EvenementController.js";
 
 function TicketList() {
     const navigate = useNavigate()
@@ -37,39 +36,58 @@ function TicketList() {
 
     return (
         <>
-            <Link to={'/tickets/create'}><button>Créer</button></Link>
+            <div className="toolbar">
+                <span />
+                <Link to="/tickets/create">
+                    <button className="btn-primary">+ Créer</button>
+                </Link>
+            </div>
 
-            <div id="main-container">
-                <div id="details-panel">
-                    <table id="tickets-list">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Date d'achat</th>
-                            <th>Évenement</th>
-                            <th>Visiteur</th>
-                            <th>Fonctions</th>
+            <div className="table-card">
+                <div className="table-card-header">{tickets.length} tickets</div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Date d'achat</th>
+                        <th>Événement</th>
+                        <th>Visiteur</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {tickets.map((t) => (
+                        <tr onClick={() => navigate(`/tickets/${t.id}`)} key={t.id}>
+                            <td><span className="muted">{t.id}</span></td>
+                            <td><span className="muted">{t.date_achat}</span></td>
+                            <td><span className="badge badge-purple">{t.evenement.nom}</span></td>
+                            <td><strong>{t.visiteur.nom}</strong></td>
+                            <td onClick={(e) => e.stopPropagation()}>
+                                <Link to={`/tickets/edit/${t.id}`} state={{ ticket: t }}>
+                                    <button className="edit-btn">Modifier</button>
+                                </Link>
+                                <button onClick={() => handleDelete(t.id)} className="delete-btn">Supprimer</button>
+                            </td>
                         </tr>
-                        </thead>
-                        <tbody>
-                        {tickets.map((t) => (
-                            <tr onClick={() => navigate(`/tickets/${t.id}`)} key={t.id}>
-                                <td>{t.id}</td>
-                                <td>{t.date_achat}</td>
-                                <td>{t.evenement.nom}</td>
-                                <td>{t.visiteur.nom}</td>
-                                <td onClick={(e) => e.stopPropagation()}>
-                                    <Link to={`/tickets/edit/${t.id}`} state={{ ticket: t }}>
-                                        <button>Modifier</button>
-                                    </Link>
-                                    <button onClick={() => handleDelete(t.id)} className={'delete-btn'}>Suprimer</button>
-                                </td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
-                    <button onClick={() => handlePagination(data.links.prev)}>previous</button>
-                    <button onClick={() => handlePagination(data.links.next)}>next</button>
+                    ))}
+                    </tbody>
+                </table>
+                <div className="pagination">
+                    <span>{tickets.length} résultats</span>
+                    <div className="pagination-btns">
+                        <button
+                            className="btn-page"
+                            disabled={!data?.links?.prev}
+                            onClick={() => handlePagination(data.links.prev)}>
+                            ← Précédent
+                        </button>
+                        <button
+                            className="btn-page"
+                            disabled={!data?.links?.next}
+                            onClick={() => handlePagination(data.links.next)}>
+                            Suivant →
+                        </button>
+                    </div>
                 </div>
             </div>
         </>

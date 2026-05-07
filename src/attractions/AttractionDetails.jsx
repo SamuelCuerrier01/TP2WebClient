@@ -33,34 +33,38 @@ function AttractionDetails() {
     console.log(attraction)
 
     return (
-        <>
-            <div className="div-infos">
-                <h2>
-                    ID : {attraction.id}
-                </h2>
-                <h2>
-                    Nom : {attraction.nom}
-                </h2>
-                <h2>
-                    Capacité : {attraction.capacite}
-                </h2>
-                <h2>
-                    Adresse : {attraction.adresse}
-                </h2>
-                <h2>
-                    Catégorie : {attraction.categorie.nom}
-                </h2>
+        <div className="div-infos">
+            <h2>{attraction.nom}</h2>
+
+            <div className="details-card">
+                <div className="details-row">
+                    <span className="details-label">ID</span>
+                    <span className="details-value">{attraction.id}</span>
+                </div>
+                <div className="details-row">
+                    <span className="details-label">Adresse</span>
+                    <span className="details-value">{attraction.adresse}</span>
+                </div>
+                <div className="details-row">
+                    <span className="details-label">Capacité</span>
+                    <span className="details-value">{attraction.capacite}</span>
+                </div>
+                <div className="details-row">
+                    <span className="details-label">Catégorie</span>
+                    <span className="badge badge-purple">{attraction.categorie.nom}</span>
+                </div>
             </div>
-            <div>
+
+            <div className="details-actions">
                 <Link to={`/attractions/edit/${attraction.id}`} state={{ attraction: attraction }}>
-                    <button>Modifier</button>
+                    <button className="edit-btn">Modifier</button>
                 </Link>
                 <Link to={`/attractions/${attraction.id}/evenements`}>
-                    <button>Voir les événements</button>
+                    <button className="edit-btn">Voir les événements</button>
                 </Link>
-                <button onClick={() => handleDelete()} className={'delete-btn'}>Suprimer</button>
+                <button onClick={handleDelete} className="delete-btn">Supprimer</button>
             </div>
-        </>
+        </div>
     );
 }
 

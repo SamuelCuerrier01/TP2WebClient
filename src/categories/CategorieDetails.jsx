@@ -33,28 +33,30 @@ function CategorieDetails() {
     console.log(categorie)
 
     return (
-        <>
-            <div className="div-infos">
-                <h2>
-                    ID : {categorie.id}
-                </h2>
-                <h2>
-                    Nom : {categorie.nom}
-                </h2>
-                <h2>
-                    Nombre d'attractions : {categorie.nombre_attractions}
-                </h2>
+        <div className="div-infos">
+            <h2>{categorie.nom}</h2>
+
+            <div className="details-card">
+                <div className="details-row">
+                    <span className="details-label">ID</span>
+                    <span className="details-value">{categorie.id}</span>
+                </div>
+                <div className="details-row">
+                    <span className="details-label">Nombre d'attractions</span>
+                    <span className="details-value">{categorie.nombre_attractions}</span>
+                </div>
             </div>
-            <div>
+
+            <div className="details-actions">
                 <Link to={`/categories/edit/${categorie.id}`} state={{ categorie: categorie }}>
-                    <button>Modifier</button>
+                    <button className="edit-btn">Modifier</button>
                 </Link>
                 <Link to={`/categories/${categorie.id}/attractions`}>
-                    <button>Voir les attractions</button>
+                    <button className="edit-btn">Voir les attractions</button>
                 </Link>
-                <button onClick={() => handleDelete()} className={'delete-btn'}>Suprimer</button>
+                <button onClick={handleDelete} className="delete-btn">Supprimer</button>
             </div>
-        </>
+        </div>
     );
 }
 

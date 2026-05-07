@@ -3,8 +3,8 @@ import { API_ENDPOINTS_ATTRACTIONS } from "../config/config.js";
 
 export default class AttractionController {
 
-    static async getAttractions() {
-        const response = await fetch(API_ENDPOINTS_ATTRACTIONS.getEntries(), {
+    static async getAttractions(search = "") {
+        const response = await fetch(API_ENDPOINTS_ATTRACTIONS.getEntries(search), {
             method: "GET",
             headers: { "Content-Type": "application/json" }
         });
@@ -21,8 +21,8 @@ export default class AttractionController {
         return await response.json();
     }
 
-    static async getEvenementByAttraction(id) {
-        const response = await fetch(API_ENDPOINTS_ATTRACTIONS.getEvenements(id), {
+    static async getEvenementByAttraction(id, search) {
+        const response = await fetch(API_ENDPOINTS_ATTRACTIONS.getEvenements(id, search), {
             method: "GET",
             headers: { "Content-Type": "application/json" }
         });

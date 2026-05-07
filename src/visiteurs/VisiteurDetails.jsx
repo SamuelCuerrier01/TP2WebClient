@@ -33,29 +33,34 @@ function VisiteurDetails() {
     console.log(visiteur)
 
     return (
-        <>
-            <div className="div-infos">
-                <h2>
-                    ID : {visiteur.id}
-                </h2>
-                <h2>
-                    Nom : {visiteur.nom}
-                </h2>
-                <h2>
-                    Email : {visiteur.email}
-                </h2>
-                <h2>
-                    Date de dernière visite : {visiteur.date_derniere_visite}
-                </h2>
-
+        <div className="div-infos">
+            <h2>{visiteur.nom}</h2>
+            <div className="details-card">
+                <div className="details-row">
+                    <span className="details-label">ID</span>
+                    <span className="details-value">{visiteur.id}</span>
+                </div>
+                <div className="details-row">
+                    <span className="details-label">Nom</span>
+                    <span className="details-value">{visiteur.nom}</span>
+                </div>
+                <div className="details-row">
+                    <span className="details-label">Email</span>
+                    <span className="details-value">{visiteur.email}</span>
+                </div>
+                <div className="details-row">
+                    <span className="details-label">Date de dernière visite</span>
+                    <span className="details-value">{visiteur.date_derniere_visite}</span>
+                </div>
             </div>
-            <div>
+
+            <div className="details-actions">
                 <Link to={`/visiteurs/edit/${visiteur.id}`} state={{ visiteur: visiteur }}>
-                    <button>Modifier</button>
+                    <button className="edit-btn">Modifier</button>
                 </Link>
                 <button onClick={() => handleDelete()} className={'delete-btn'}>Suprimer</button>
             </div>
-        </>
+        </div>
     );
 }
 

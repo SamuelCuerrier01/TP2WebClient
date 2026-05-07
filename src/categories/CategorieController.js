@@ -1,13 +1,14 @@
 import { API_ENDPOINTS_CATEGORIES } from "../config/config.js";
 
 
-export default class EvenementController {
+export default class CategorieControllerController {
 
-    static async getCategories() {
-        const response = await fetch(API_ENDPOINTS_CATEGORIES.getEntries(), {
+    static async getCategories(search = "") {
+        const response = await fetch(API_ENDPOINTS_CATEGORIES.getEntries(search), {
             method: "GET",
             headers: { "Content-Type": "application/json" }
         });
+
         if (!response.ok) throw new Error("Erreur API");
         return await response.json();
     }
@@ -21,8 +22,8 @@ export default class EvenementController {
         return await response.json();
     }
 
-    static async getAttractionByCategory(id) {
-        const response = await fetch(API_ENDPOINTS_CATEGORIES.getAttractions(id), {
+    static async getAttractionByCategory(id, search) {
+        const response = await fetch(API_ENDPOINTS_CATEGORIES.getAttractions(id, search), {
             method: "GET",
             headers: { "Content-Type": "application/json" }
         });

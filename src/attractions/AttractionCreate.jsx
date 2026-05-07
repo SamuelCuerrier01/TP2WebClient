@@ -29,23 +29,38 @@ function AttractionCreate() {
     };
 
     return (
-        <>
-            <form onSubmit={handleCreate}>
-                <label htmlFor="nom">Nom:</label>
-                <input name="nom" required/>
-                <label htmlFor="adresse">Adresse:</label>
-                <input name="adresse" required/>
-                <label htmlFor="capacite">Capacité:</label>
-                <input type="number" name="capacite" required/>
-                <select name="categorie_id" required>
-                    <option value="" disabled selected hidden>Choisir une Option...</option>
-                    {categories.map((c) => (
-                        <option key={c.id} value={c.id}>{c.nom}</option>
-                    ))}
-                </select>
-                <button type="submit">Envoyer</button>
+        <div className="div-infos">
+            <h2 style={{ margin: "0 0 1rem" }}>Créer une attraction</h2>
+            <form onSubmit={handleCreate} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+
+                <div className="form-group">
+                    <label htmlFor="nom">Nom</label>
+                    <input id="nom" name="nom" required />
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="adresse">Adresse</label>
+                    <input id="adresse" name="adresse" required />
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="capacite">Capacité</label>
+                    <input id="capacite" type="number" name="capacite" required />
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="categorie_id">Catégorie</label>
+                    <select id="categorie_id" name="categorie_id" required>
+                        <option value="" disabled hidden>Choisir une option...</option>
+                        {categories.map((c) => (
+                            <option key={c.id} value={c.id}>{c.nom}</option>
+                        ))}
+                    </select>
+                </div>
+
+                <button type="submit">Créer</button>
             </form>
-        </>
+        </div>
     );
 }
 

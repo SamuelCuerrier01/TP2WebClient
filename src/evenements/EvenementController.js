@@ -3,8 +3,8 @@ import { API_ENDPOINTS_EVENEMENTS} from "../config/config.js";
 
 export default class EvenementController {
 
-    static async getEvenements() {
-        const response = await fetch(API_ENDPOINTS_EVENEMENTS.getEntries(), {
+    static async getEvenements(search = "") {
+        const response = await fetch(API_ENDPOINTS_EVENEMENTS.getEntries(search), {
             method: "GET",
             headers: { "Content-Type": "application/json" }
         });
@@ -21,8 +21,8 @@ export default class EvenementController {
         return await response.json();
     }
 
-    static async getVisiteursByEvenement(id) {
-        const response = await fetch(API_ENDPOINTS_EVENEMENTS.getVisiteurs(id), {
+    static async getVisiteursByEvenement(id, search) {
+        const response = await fetch(API_ENDPOINTS_EVENEMENTS.getVisiteurs(id, search), {
             method: "GET",
             headers: { "Content-Type": "application/json" }
         });

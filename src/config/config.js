@@ -1,16 +1,19 @@
 const BASE_URL = "http://localhost/api";
 export const API_ENDPOINTS_ATTRACTIONS = {
-    getEntries: () => `${BASE_URL}/attractions`,
+    getEntries: (name = "") => `${BASE_URL}/attractions${name.trim() !== "" ?
+        `?nom=${encodeURIComponent(name)}` : ""}`,
     getEntry: (id) => `${BASE_URL}/attractions/${id}`,
     getAllEntries: () => `${BASE_URL}/attractions/all`,
     createEntry: () => `${BASE_URL}/attractions`,
     updateEntry: (id) => `${BASE_URL}/attractions/${id}`,
     deleteEntry: (id) => `${BASE_URL}/attractions/${id}`,
-    getEvenements: (id) => `${BASE_URL}/attractions/${id}/evenements`
+    getEvenements: (id, name = "") => `${BASE_URL}/attractions/${id}/evenements${name.trim() !== "" ?
+        `?nom=${encodeURIComponent(name)}` : ""}`
 };
 
 export const API_ENDPOINTS_VISITEURS = {
-    getEntries: () => `${BASE_URL}/visiteurs`,
+    getEntries: (name = "") => `${BASE_URL}/visiteurs${name.trim() !== "" ? 
+        `?nom=${encodeURIComponent(name)}` : ""}`,
     getEntry: (id) => `${BASE_URL}/visiteurs/${id}`,
     createEntry: () => `${BASE_URL}/visiteurs`,
     updateEntry: (id) => `${BASE_URL}/visiteurs/${id}`,
@@ -18,21 +21,25 @@ export const API_ENDPOINTS_VISITEURS = {
 };
 
 export const API_ENDPOINTS_CATEGORIES = {
-    getEntries: () => `${BASE_URL}/categories`,
+    getEntries: (name = "") => `${BASE_URL}/categories${name.trim() !== "" ?
+        `?nom=${encodeURIComponent(name)}` : ""}`,
     getEntry: (id) => `${BASE_URL}/categories/${id}`,
     createEntry: () => `${BASE_URL}/categories`,
     updateEntry: (id) => `${BASE_URL}/categories/${id}`,
     deleteEntry: (id) => `${BASE_URL}/categories/${id}`,
-    getAttractions: (id) => `${BASE_URL}/categories/${id}/attractions`,
+    getAttractions: (id, name = "") => `${BASE_URL}/categories/${id}/attractions${name.trim() !== "" ?
+        `?nom=${encodeURIComponent(name)}` : ""}`,
 };
 
 export const API_ENDPOINTS_EVENEMENTS = {
-    getEntries: () => `${BASE_URL}/evenements`,
+    getEntries: (name = "") => `${BASE_URL}/evenements${name.trim() !== "" ? 
+        `?nom=${encodeURIComponent(name)}` : ""}`,
     getEntry: (id) => `${BASE_URL}/evenements/${id}`,
     createEntry: () => `${BASE_URL}/evenements`,
     updateEntry: (id) => `${BASE_URL}/evenements/${id}`,
     deleteEntry: (id) => `${BASE_URL}/evenements/${id}`,
-    getVisiteurs: (id) => `${BASE_URL}/evenements/${id}/visiteurs`
+    getVisiteurs: (id, name = "") => `${BASE_URL}/evenements/${id}/visiteurs${name.trim() !== "" ?
+        `?nom=${encodeURIComponent(name)}` : ""}`
 };
 
 export const API_ENDPOINTS_TICKETS = {

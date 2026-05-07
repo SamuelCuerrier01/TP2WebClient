@@ -38,31 +38,40 @@ function TicketEdit() {
     };
 
     return (
-        <>
-            <form onSubmit={handleEdit}>
-                <label htmlFor="evenement_id">Évenement:</label>
-                <select name="evenement_id" required>
-                    <option value="" disabled selected hidden>Choisir une Option...</option>
-                    {evenements.map((e) => (
-                        <option key={e.id} value={e.id}>{e.nom}</option>
-                    ))}
-                </select>
+        <div className="div-infos">
+            <h2 style={{ margin: "0 0 1rem" }}>Modifier un ticket</h2>
+            <form onSubmit={handleEdit} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
 
+                <input type="hidden" name="id" value={ticket.id} />
 
-                <label htmlFor="visiteur_id">Visiteur:</label>
-                <select name="visiteur_id" required>
-                    <option value="" disabled selected hidden>Choisir une Option...</option>
-                    {visiteurs.map((v) => (
-                        <option key={v.id} value={v.id}>{v.nom}</option>
-                    ))}
-                </select>
+                <div className="form-group">
+                    <label htmlFor="evenement_id">Événement</label>
+                    <select id="evenement_id" name="evenement_id" required>
+                        <option value="" disabled hidden>Choisir une option...</option>
+                        {evenements.map((e) => (
+                            <option key={e.id} value={e.id}>{e.nom}</option>
+                        ))}
+                    </select>
+                </div>
 
-                <label htmlFor="evenement_id">Date d'achat:</label>
-                <input type="date" name="date_achat" value={ticket.date_achat} required/>
+                <div className="form-group">
+                    <label htmlFor="visiteur_id">Visiteur</label>
+                    <select id="visiteur_id" name="visiteur_id" required>
+                        <option value="" disabled hidden>Choisir une option...</option>
+                        {visiteurs.map((v) => (
+                            <option key={v.id} value={v.id}>{v.nom}</option>
+                        ))}
+                    </select>
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="date_achat">Date d'achat</label>
+                    <input id="date_achat" type="date" name="date_achat" defaultValue={ticket.date_achat} required />
+                </div>
 
                 <button type="submit">Envoyer</button>
             </form>
-        </>
+        </div>
     );
 }
 

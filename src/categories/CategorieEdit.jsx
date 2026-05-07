@@ -21,14 +21,20 @@ function CategorieEdit() {
     };
 
     return (
-        <>
-            <form onSubmit={handleEdit}>
+        <div className="div-infos">
+            <h2 style={{ margin: "0 0 1rem" }}>Modifier une catégorie</h2>
+            <form onSubmit={handleEdit} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+
                 <input type="hidden" name="id" value={categorie.id} />
-                <label htmlFor="nom">Nom:</label>
-                <input name="nom" defaultValue={categorie.nom} required/>
+
+                <div className="form-group">
+                    <label htmlFor="nom">Nom</label>
+                    <input id="nom" name="nom" defaultValue={categorie.nom} required />
+                </div>
+
                 <button type="submit">Envoyer</button>
             </form>
-        </>
+        </div>
     );
 }
 

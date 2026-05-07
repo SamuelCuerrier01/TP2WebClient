@@ -18,13 +18,18 @@ function CategorieCreate() {
     };
 
     return (
-        <>
-            <form onSubmit={handleCreate}>
-                <label htmlFor="nom">Nom:</label>
-                <input name="nom" required/>
-                <button type="submit">Envoyer</button>
+        <div className="div-infos">
+            <h2 style={{ margin: "0 0 1rem" }}>Créer une catégorie</h2>
+            <form onSubmit={handleCreate} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+
+                <div className="form-group">
+                    <label htmlFor="nom">Nom</label>
+                    <input id="nom" name="nom" required />
+                </div>
+
+                <button type="submit">Créer</button>
             </form>
-        </>
+        </div>
     );
 }
 

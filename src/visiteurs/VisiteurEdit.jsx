@@ -31,29 +31,40 @@ function VisiteurEdit() {
     };
 
     return (
-        <>
-            <form onSubmit={handleEdit}>
+        <div className="div-infos">
+            <h2 style={{ margin: "0 0 1rem" }}>Modifier un visiteur</h2>
+            <form onSubmit={handleEdit} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+
                 <input type="hidden" name="id" value={visiteur.id} />
 
-                <label htmlFor="nom">Nom:</label>
-                <input name="nom" defaultValue={visiteur.nom} required/>
+                <div className="form-group">
+                    <label htmlFor="nom">Nom</label>
+                    <input id="nom" name="nom" defaultValue={visiteur.nom} required />
+                </div>
 
-                <label htmlFor="email">Email:</label>
-                <input type="email" name="email" defaultValue={visiteur.email} required/>
+                <div className="form-group">
+                    <label htmlFor="email">Email</label>
+                    <input id="email" type="email" name="email" defaultValue={visiteur.email} required />
+                </div>
 
-                <label htmlFor="date_derniere_visite">Date de dernière visite:</label>
-                <input type="date" name="date_derniere_visite" defaultValue={visiteur.date_derniere_visite} required/>
+                <div className="form-group">
+                    <label htmlFor="date_derniere_visite">Date de dernière visite</label>
+                    <input id="date_derniere_visite" type="date" name="date_derniere_visite" defaultValue={visiteur.date_derniere_visite} required />
+                </div>
 
-                <label htmlFor="attraction_id">Attraction:</label>
-                <select name="attraction_id" required>
-                    <option value="" disabled selected hidden>Choisir une Option...</option>
-                    {attractions.map((a) => (
-                        <option key={a.id} value={a.id}>{a.nom}</option>
-                    ))}
-                </select>
+                <div className="form-group">
+                    <label htmlFor="attraction_id">Attraction</label>
+                    <select id="attraction_id" name="attraction_id" required>
+                        <option value="" disabled hidden>Choisir une option...</option>
+                        {attractions.map((a) => (
+                            <option key={a.id} value={a.id}>{a.nom}</option>
+                        ))}
+                    </select>
+                </div>
+
                 <button type="submit">Envoyer</button>
             </form>
-        </>
+        </div>
     );
 }
 

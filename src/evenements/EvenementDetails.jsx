@@ -13,7 +13,7 @@ function EvenementDetails() {
             setEvenement(data);
         };
         fetchData();
-    }, []);
+    }, [id]);
 
     const handleDelete = async () => {
         if (window.confirm("Supprimer cette evenement ?")) {
@@ -33,34 +33,41 @@ function EvenementDetails() {
     console.log(evenement)
 
     return (
-        <>
-            <div className="div-infos">
-                <h2>
-                    ID : {evenement.id}
-                </h2>
-                <h2>
-                    Nom : {evenement.nom}
-                </h2>
-                <h2>
-                    Date : {evenement.date_evenement}
-                </h2>
-                <h2>
-                    Capacité : {evenement.capacite}
-                </h2>
-                <h2>
-                    Prix : {evenement.prix}
-                </h2>
+        <div className="div-infos">
+            <h2>{evenement.nom}</h2>
+            <div className="details-card">
+                <div className="details-row">
+                    <span className="details-label">ID</span>
+                    <span className="details-value">{evenement.id}</span>
+                </div>
+                <div className="details-row">
+                    <span className="details-label">Nom</span>
+                    <span className="details-value">{evenement.nom}</span>
+                </div>
+                <div className="details-row">
+                    <span className="details-label">Date</span>
+                    <span className="details-value">{evenement.date_evenement}</span>
+                </div>
+                <div className="details-row">
+                    <span className="details-label">Capacité</span>
+                    <span className="details-value">{evenement.capacite}</span>
+                </div>
+                <div className="details-row">
+                    <span className="details-label">Prix</span>
+                    <span className="details-value">{evenement.prix}</span>
+                </div>
             </div>
-            <div>
+
+            <div className="details-actions">
                 <Link to={`/evenements/edit/${evenement.id}`} state={{ evenement: evenement }}>
-                    <button>Modifier</button>
+                    <button className="edit-btn">Modifier</button>
                 </Link>
                 <Link to={`/evenements/${evenement.id}/visiteurs`}>
-                    <button>Voir les visiteurs</button>
+                    <button className="edit-btn">Voir les visiteurs</button>
                 </Link>
                 <button onClick={() => handleDelete()} className={'delete-btn'}>Suprimer</button>
             </div>
-        </>
+        </div>
     );
 }
 

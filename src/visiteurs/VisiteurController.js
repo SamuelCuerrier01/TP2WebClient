@@ -3,8 +3,8 @@ import {API_ENDPOINTS_VISITEURS} from "../config/config.js";
 
 export default class VisiteurController {
 
-    static async getVisiteurs() {
-        const response = await fetch(API_ENDPOINTS_VISITEURS.getEntries(), {
+    static async getVisiteurs(search = "") {
+        const response = await fetch(API_ENDPOINTS_VISITEURS.getEntries(search), {
             method: "GET",
             headers: { "Content-Type": "application/json" }
         });

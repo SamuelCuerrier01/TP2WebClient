@@ -13,7 +13,7 @@ function TicketDetails() {
             setTicket(data);
         };
         fetchData();
-    }, []);
+    }, [id]);
 
     const handleDelete = async () => {
         if (window.confirm("Supprimer cette ticket ?")) {
@@ -33,28 +33,34 @@ function TicketDetails() {
     console.log(ticket)
 
     return (
-        <>
-            <div className="div-infos">
-                <h2>
-                    ID : {ticket.id}
-                </h2>
-                <h2>
-                    Nom de l'événement : {ticket.evenement.nom}
-                </h2>
-                <h2>
-                    Date de l'événement : {ticket.evenement.date_evenement}
-                </h2>
-                <h2>
-                    Visiteur : {ticket.visiteur.nom}
-                </h2>
+        <div className="div-infos">
+            <h2>Ticket numero {ticket.id}</h2>
+            <div className="details-card">
+                <div className="details-row">
+                    <span className="details-label">ID</span>
+                    <span className="details-value">{ticket.id}</span>
+                </div>
+                <div className="details-row">
+                    <span className="details-label">Nom de l'évènement</span>
+                    <span className="details-value">{ticket.evenement.nom}</span>
+                </div>
+                <div className="details-row">
+                    <span className="details-label">Date de l'évènement</span>
+                    <span className="details-value">{ticket.evenement.date_evenement}</span>
+                </div>
+                <div className="details-row">
+                    <span className="details-label">Visiteur</span>
+                    <span className="details-value">{ticket.visiteur.nom}</span>
+                </div>
             </div>
-            <div>
+
+            <div className="details-actions">
                 <Link to={`/tickets/edit/${ticket.id}`} state={{ ticket: ticket }}>
-                    <button>Modifier</button>
+                    <button className="edit-btn">Modifier</button>
                 </Link>
                 <button onClick={() => handleDelete()} className={'delete-btn'}>Suprimer</button>
             </div>
-        </>
+        </div>
     );
 }
 
