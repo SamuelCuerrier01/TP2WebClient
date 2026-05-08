@@ -18,12 +18,17 @@ function AttractionEdit() {
     const navigate = useNavigate();
     const location = useLocation();
     const attraction = location.state?.attraction;
-    console.log(attraction);
     const handleEdit = async (event) => {
         event.preventDefault();
 
         const formData = new FormData(event.currentTarget);
         const concentratedData = Object.fromEntries(formData.entries());
+        for (const [key, value] of formData.entries()) {
+            if (!key || value.trim().length === 0){
+                alert("aucun champs ne dois être vide ou rempli d'espaces");
+                return;
+            }
+        }
         try {
             await AttractionController.editAttraction(concentratedData);
             navigate("/attractions");

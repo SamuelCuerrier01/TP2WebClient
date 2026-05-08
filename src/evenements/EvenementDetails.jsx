@@ -30,7 +30,6 @@ function EvenementDetails() {
     if (!evenement || Object.keys(evenement).length === 0) {
         return <div>Chargement des détails...</div>;
     }
-    console.log(evenement)
 
     return (
         <div className="div-infos">

@@ -41,12 +41,11 @@ export default class VisiteurController {
     }
 
     static async createVisiteur(data) {
-        const response = await fetch(API_ENDPOINTS_VISITEURS.createEntry(), {
+        await fetch(API_ENDPOINTS_VISITEURS.createEntry(), {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
         });
-        console.log(response);
     }
 
     static async editVisiteur(data) {

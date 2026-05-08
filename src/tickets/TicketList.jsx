@@ -32,7 +32,6 @@ function TicketList() {
             }
         }
     };
-    console.log(tickets);
 
     return (
         <>

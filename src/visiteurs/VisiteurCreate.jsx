@@ -19,6 +19,12 @@ function VisiteurCreate() {
 
         const formData = new FormData(event.currentTarget);
         const concentratedData = Object.fromEntries(formData.entries());
+        for (const [key, value] of formData.entries()) {
+            if (!key || value.trim().length === 0){
+                alert("aucun champs ne dois être vide ou rempli d'espaces");
+                return;
+            }
+        }
         try {
             await VisiteurController.createVisiteur(concentratedData);
             navigate("/visiteurs");

@@ -13,7 +13,6 @@ function CategorieList() {
         const json = await CategorieController.getCategoriesByPage(url);
         setCategories(Array.isArray(json.data) ? json.data : []);
         setData(json);
-        console.log(json)
     }
 
     useEffect(() => {

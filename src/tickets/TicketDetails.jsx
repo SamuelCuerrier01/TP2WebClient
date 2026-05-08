@@ -30,7 +30,6 @@ function TicketDetails() {
     if (!ticket || Object.keys(ticket).length === 0) {
         return <div>Chargement des détails...</div>;
     }
-    console.log(ticket)
 
     return (
         <div className="div-infos">

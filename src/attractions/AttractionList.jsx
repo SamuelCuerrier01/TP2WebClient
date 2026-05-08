@@ -15,7 +15,6 @@ function AttractionList() {
         const json = await AttractionController.getAttractionsByPage(url);
         setAttractions(Array.isArray(json.data) ? json.data : []);
         setData(json);
-        console.log(json)
     }
 
     useEffect(() => {

@@ -30,7 +30,6 @@ function CategorieDetails() {
     if (!categorie || Object.keys(categorie).length === 0) {
         return <div>Chargement des détails...</div>;
     }
-    console.log(categorie)
 
     return (
         <div className="div-infos">
