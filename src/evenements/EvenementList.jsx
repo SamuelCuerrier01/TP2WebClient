@@ -1,8 +1,9 @@
 import {useEffect, useState} from "react";
 import EvenementController from "./EvenementController.js";
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
 import AttractionController from "../attractions/AttractionController.js";
 import SearchInput from "../SearchInput.jsx";
+import VisiteurController from "../visiteurs/VisiteurController.js";
 
 function EvenementList() {
     const {id} = useParams();
@@ -10,9 +11,12 @@ function EvenementList() {
     const navigate = useNavigate()
     const [evenements, setEvenements] = useState([]);
     const [data, setData] = useState()
+    const location = useLocation();
+    const isVisiteur = location.pathname.startsWith("/visiteurs");
+    const isAttraction = location.pathname.startsWith("/attractions");
 
     async function handlePagination(url){
-        const json = await EvenementController.getEvenementsByPage(url);
+        const json = await EvenementController.getEvenementsByPage(url, search);
         setEvenements(Array.isArray(json.data) ? json.data : []);
         setData(json);
     }
@@ -21,8 +25,12 @@ function EvenementList() {
         const fetchData = async () => {
             let json;
             if(id){
-                json = await AttractionController.getEvenementByAttraction(id, search);
-
+                if(isVisiteur){
+                    json = await VisiteurController.getEvenementsByVisiteur(id, search);
+                }
+                if(isAttraction){
+                    json = await AttractionController.getEvenementByAttraction(id, search);
+                }
             } else {
                 json = await EvenementController.getEvenements(search);
             }
@@ -43,7 +51,6 @@ function EvenementList() {
         }
     };
 
-
     return (
         <>
             <div className="toolbar">
@@ -54,7 +61,7 @@ function EvenementList() {
             </div>
 
             <div className="table-card">
-                <div className="table-card-header">{evenements.length} événements</div>
+                <div className="table-card-header">{data?.meta?.total ?? 0} événements</div>
                 <table>
                     <thead>
                     <tr>

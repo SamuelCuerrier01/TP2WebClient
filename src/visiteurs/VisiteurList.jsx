@@ -12,7 +12,7 @@ function VisiteurList() {
     const [search, setSearch] = useState("");
 
     async function handlePagination(url){
-        const json = await VisiteurController.getVisiteursByPage(url);
+        const json = await VisiteurController.getVisiteursByPage(url, search);
         setVisiteurs(Array.isArray(json.data) ? json.data : []);
         setData(json);
     }
@@ -54,7 +54,7 @@ function VisiteurList() {
             </div>
 
             <div className="table-card">
-                <div className="table-card-header">{visiteurs.length} visiteurs</div>
+                <div className="table-card-header">{data?.meta?.total ?? 0} visiteurs</div>
                 <table>
                     <thead>
                     <tr>

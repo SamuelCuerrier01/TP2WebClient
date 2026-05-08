@@ -12,11 +12,17 @@ export default class AttractionController {
         return await response.json();
     }
 
-    static async getAttractionsByPage(url) {
+    static async getAttractionsByPage(url, search = "") {
+        if (search.trim() !== "") {
+            const separator = url.includes("?") ? "&" : "?";
+            url = `${url}${separator}nom=${encodeURIComponent(search)}`;
+        }
+
         const response = await fetch(url, {
             method: "GET",
             headers: { "Content-Type": "application/json" }
         });
+
         if (!response.ok) throw new Error("Erreur API");
         return await response.json();
     }
@@ -39,7 +45,6 @@ export default class AttractionController {
         const json = await response.json();
         return json.data;
     }
-
 
     static async getAllAtractions() {
         const response = await fetch(API_ENDPOINTS_ATTRACTIONS.getAllEntries(), {

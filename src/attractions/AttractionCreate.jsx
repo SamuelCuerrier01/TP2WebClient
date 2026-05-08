@@ -10,8 +10,8 @@ function AttractionCreate() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const json = await CategorieController.getCategories();
-            setCategories(Array.isArray(json.data) ? json.data : []);
+            const json = await CategorieController.getAllCategories();
+            setCategories(Array.isArray(json) ? json : []);
         };
         fetchData();
     }, []);

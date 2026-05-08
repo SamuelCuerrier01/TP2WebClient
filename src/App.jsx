@@ -39,6 +39,8 @@ function App() {
                     <Route path="/visiteurs/:id" element={<VisiteurDetails />} />
                     <Route path="/visiteurs/edit/:id" element={<VisiteurEdit />} />
                     <Route path="/visiteurs/create" element={<VisiteurCreate />} />
+                    <Route path="/visiteurs/:id/evenements" element={<EvenementList />} />
+                    <Route path="/visiteurs/:id/tickets" element={<TicketList />} />
 
                     <Route path="/categories" element={<CategorieList />} />
                     <Route path="/categories/:id" element={<CategorieDetails />} />

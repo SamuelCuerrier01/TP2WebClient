@@ -10,7 +10,7 @@ function CategorieList() {
     const [data, setData] = useState()
 
     async function handlePagination(url){
-        const json = await CategorieController.getCategoriesByPage(url);
+        const json = await CategorieController.getCategoriesByPage(url, search);
         setCategories(Array.isArray(json.data) ? json.data : []);
         setData(json);
     }
@@ -45,7 +45,7 @@ function CategorieList() {
             </div>
 
             <div className="table-card">
-                <div className="table-card-header">{categories.length} catégories</div>
+                <div className="table-card-header">{data?.meta?.total ?? 0} catégories</div>
                 <table>
                     <thead>
                     <tr>

@@ -1,26 +1,37 @@
 import { useEffect, useState } from "react";
 import TicketController from "./TicketController.js";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
+import VisiteurController from "../visiteurs/VisiteurController.js";
+import SearchInput from "../SearchInput.jsx";
 
 function TicketList() {
     const navigate = useNavigate()
     const [tickets, setTickets] = useState([]);
     const [data, setData] = useState()
+    const { id } = useParams()
+    const [dateDebut, setDateDebut] = useState("");
+    const [dateFin, setDateFin] = useState("");
 
     async function handlePagination(url){
-        const json = await TicketController.getTicketsByPage(url);
+        const json = await TicketController.getTicketsByPage(url, dateDebut, dateFin);
         setTickets(Array.isArray(json.data) ? json.data : []);
         setData(json);
     }
 
     useEffect(() => {
         const fetchData = async () => {
-            const json = await TicketController.getTickets();
+            let json;
+            if(id){
+                json = await VisiteurController.getTicketsByVisiteur(id, dateDebut, dateFin);
+
+            } else {
+                json = await TicketController.getTickets(dateDebut, dateFin);
+            }
             setTickets(Array.isArray(json.data) ? json.data : []);
             setData(json);
         };
         fetchData();
-    }, []);
+    }, [id, dateDebut, dateFin]);
 
     const handleDelete = async (id) => {
         if (window.confirm("Supprimer cette catégorie ?")) {
@@ -35,6 +46,9 @@ function TicketList() {
 
     return (
         <>
+            <SearchInput value={dateDebut} onChange={setDateDebut} placeholder={"Tickets à partir de cette date"}/>
+            <SearchInput value={dateFin} onChange={setDateFin} placeholder={"Tickets avant cette date"}/>
+
             <div className="toolbar">
                 <span />
                 <Link to="/tickets/create">
@@ -43,7 +57,7 @@ function TicketList() {
             </div>
 
             <div className="table-card">
-                <div className="table-card-header">{tickets.length} tickets</div>
+                <div className="table-card-header">{data?.meta?.total ?? 0} tickets</div>
                 <table>
                     <thead>
                     <tr>

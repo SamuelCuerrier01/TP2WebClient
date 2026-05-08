@@ -1,4 +1,4 @@
-import { API_ENDPOINTS_CATEGORIES } from "../config/config.js";
+import {API_ENDPOINTS_ATTRACTIONS, API_ENDPOINTS_CATEGORIES} from "../config/config.js";
 
 
 export default class CategorieControllerController {
@@ -13,7 +13,22 @@ export default class CategorieControllerController {
         return await response.json();
     }
 
-    static async getCategoriesByPage(url) {
+    static async getAllCategories() {
+        const response = await fetch(API_ENDPOINTS_CATEGORIES.getAllEntries(), {
+            method: "GET",
+            headers: { "Content-Type": "application/json" }
+        });
+        if (!response.ok) throw new Error("Erreur API");
+        const json = await response.json();
+        return json.data;
+    }
+
+    static async getCategoriesByPage(url, search = "") {
+        if (search.trim() !== "") {
+            const separator = url.includes("?") ? "&" : "?";
+            url = `${url}${separator}nom=${encodeURIComponent(search)}`;
+        }
+
         const response = await fetch(url, {
             method: "GET",
             headers: { "Content-Type": "application/json" }

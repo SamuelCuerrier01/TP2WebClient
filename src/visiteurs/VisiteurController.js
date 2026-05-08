@@ -11,8 +11,22 @@ export default class VisiteurController {
         if (!response.ok) throw new Error("Erreur API");
         return await response.json();
     }
+    static async getAllVisiteurs() {
+        const response = await fetch(API_ENDPOINTS_VISITEURS.getAllEntries(), {
+            method: "GET",
+            headers: { "Content-Type": "application/json" }
+        });
+        if (!response.ok) throw new Error("Erreur API");
+        const json = await response.json();
+        return json.data;
+    }
 
-    static async getVisiteursByPage(url) {
+    static async getVisiteursByPage(url, search = "") {
+        if (search.trim() !== "") {
+            const separator = url.includes("?") ? "&" : "?";
+            url = `${url}${separator}nom=${encodeURIComponent(search)}`;
+        }
+
         const response = await fetch(url, {
             method: "GET",
             headers: { "Content-Type": "application/json" }
@@ -20,7 +34,6 @@ export default class VisiteurController {
         if (!response.ok) throw new Error("Erreur API");
         return await response.json();
     }
-
 
     static async getVisiteurById(id) {
         const response = await fetch(API_ENDPOINTS_VISITEURS.getEntry(id), {
@@ -30,6 +43,24 @@ export default class VisiteurController {
         if (!response.ok) throw new Error("Erreur API");
         const json = await response.json();
         return json.data;
+    }
+
+    static async getEvenementsByVisiteur(id, search) {
+        const response = await fetch(API_ENDPOINTS_VISITEURS.getEvenements(id, search), {
+            method: "GET",
+            headers: { "Content-Type": "application/json" }
+        });
+        if (!response.ok) throw new Error("Erreur API");
+        return await response.json();
+    }
+
+    static async getTicketsByVisiteur(id, date_debut, date_fin) {
+        const response = await fetch(API_ENDPOINTS_VISITEURS.getTickets(id, date_debut, date_fin), {
+            method: "GET",
+            headers: { "Content-Type": "application/json" }
+        });
+        if (!response.ok) throw new Error("Erreur API");
+        return await response.json();
     }
 
     static async deleteVisiteur(id) {

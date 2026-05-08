@@ -12,7 +12,7 @@ function AttractionList() {
     const [data, setData] = useState()
 
     async function handlePagination(url){
-        const json = await AttractionController.getAttractionsByPage(url);
+        const json = await AttractionController.getAttractionsByPage(url, search);
         setAttractions(Array.isArray(json.data) ? json.data : []);
         setData(json);
     }
@@ -53,7 +53,7 @@ function AttractionList() {
             </div>
 
             <div className="table-card">
-                <div className="table-card-header">{attractions.length} attractions</div>
+                <div className="table-card-header">{data?.meta?.total ?? 0} attractions</div>
                 <table>
                     <thead>
                     <tr>
