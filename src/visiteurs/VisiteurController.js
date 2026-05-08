@@ -46,15 +46,28 @@ export default class VisiteurController {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
         });
-        console.log(response);
+
+        if (!response.ok) {
+            const json = await response.json();
+            const error = new Error("Erreur API");
+            error.errors = json.errors;
+            throw error;
+        }
     }
 
     static async editVisiteur(data) {
-        await fetch(API_ENDPOINTS_VISITEURS.updateEntry(data.id), {
+        const response = await fetch(API_ENDPOINTS_VISITEURS.updateEntry(data.id), {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
         });
+
+        if (!response.ok) {
+            const json = await response.json();
+            const error = new Error("Erreur API");
+            error.errors = json.errors;
+            throw error;
+        }
     }
 
 }

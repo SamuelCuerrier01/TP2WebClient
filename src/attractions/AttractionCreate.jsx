@@ -2,9 +2,11 @@ import AttractionController from "./AttractionController.js";
 import { useNavigate } from "react-router-dom";
 import {useEffect, useState} from "react";
 import CategorieController from "../categories/CategorieController.js";
+import ErrorBar from "../ErrorBar.jsx";
 
 function AttractionCreate() {
     const [categories, setCategories] = useState([]);
+    const [error, setError] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -24,12 +26,18 @@ function AttractionCreate() {
             await AttractionController.createAttraction(concentratedData);
             navigate("/attractions");
         } catch (err) {
-            console.error(err);
+            if (err.errors) {
+                setError(Object.values(err.errors).flat());
+            } else {
+                setError(["Erreur serveur ou réseau"]);
+            }
         }
     };
 
     return (
         <div className="div-infos">
+            <ErrorBar error={error} />
+
             <h2 style={{ margin: "0 0 1rem" }}>Créer une attraction</h2>
             <form onSubmit={handleCreate} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
 

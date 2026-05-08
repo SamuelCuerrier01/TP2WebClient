@@ -60,19 +60,33 @@ export default class AttractionController {
     }
 
     static async createAttraction(data) {
-        await fetch(API_ENDPOINTS_ATTRACTIONS.createEntry(), {
+        const response = await fetch(API_ENDPOINTS_ATTRACTIONS.createEntry(), {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
         });
+
+        if (!response.ok) {
+            const json = await response.json();
+            const error = new Error("Erreur API");
+            error.errors = json.errors;
+            throw error;
+        }
     }
 
     static async editAttraction(data) {
-        await fetch(API_ENDPOINTS_ATTRACTIONS.updateEntry(data.id), {
+        const response = await fetch(API_ENDPOINTS_ATTRACTIONS.updateEntry(data.id), {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
         });
+
+        if (!response.ok) {
+            const json = await response.json();
+            const error = new Error("Erreur API");
+            error.errors = json.errors;
+            throw error;
+        }
     }
 
 }

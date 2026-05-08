@@ -1,10 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import CategorieController from "../categories/CategorieController.js";
+import {useState} from "react";
+import ErrorBar from "../ErrorBar.jsx";
 
 function CategorieEdit() {
     const navigate = useNavigate();
     const location = useLocation();
+    const [error, setError] = useState([]);
     const categorie = location.state?.categorie;
     console.log(categorie);
     const handleEdit = async (event) => {
@@ -16,12 +19,18 @@ function CategorieEdit() {
             await CategorieController.editCategorie(concentratedData);
             navigate("/categories");
         } catch (err) {
-            console.error(err);
+            if (err.errors) {
+                setError(Object.values(err.errors).flat());
+            } else {
+                setError(["Erreur serveur ou réseau"]);
+            }
         }
     };
 
     return (
         <div className="div-infos">
+            <ErrorBar error={error} />
+
             <h2 style={{ margin: "0 0 1rem" }}>Modifier une catégorie</h2>
             <form onSubmit={handleEdit} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
 

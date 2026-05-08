@@ -3,11 +3,12 @@ import TicketController from "../tickets/TicketController.js";
 import {useEffect, useState} from "react";
 import EvenementController from "../evenements/EvenementController.js";
 import VisiteurController from "../visiteurs/VisiteurController.js";
+import ErrorBar from "../ErrorBar.jsx";
 
 function TicketCreate() {
-
     const [evenements, setEvenements] = useState([]);
     const [visiteurs, setVisiteurs] = useState([]);
+    const [error, setError] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -29,12 +30,18 @@ function TicketCreate() {
             await TicketController.createTicket(concentratedData);
             navigate("/tickets");
         } catch (err) {
-            console.error(err);
+            if (err.errors) {
+                setError(Object.values(err.errors).flat());
+            } else {
+                setError(["Erreur serveur ou réseau"]);
+            }
         }
     };
 
     return (
         <div className="div-infos">
+            <ErrorBar error={error} />
+
             <h2 style={{ margin: "0 0 1rem" }}>Créer un ticket</h2>
             <form onSubmit={handleCreate} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
 

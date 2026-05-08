@@ -40,19 +40,33 @@ export default class TicketController {
     }
 
     static async createTicket(data) {
-        await fetch(API_ENDPOINTS_TICKETS.createEntry(), {
+        const response = await fetch(API_ENDPOINTS_TICKETS.createEntry(), {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
         });
+
+        if (!response.ok) {
+            const json = await response.json();
+            const error = new Error("Erreur API");
+            error.errors = json.errors;
+            throw error;
+        }
     }
 
     static async editTicket(data) {
-        await fetch(API_ENDPOINTS_TICKETS.updateEntry(data.id), {
+        const response = await fetch(API_ENDPOINTS_TICKETS.updateEntry(data.id), {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
         });
+
+        if (!response.ok) {
+            const json = await response.json();
+            const error = new Error("Erreur API");
+            error.errors = json.errors;
+            throw error;
+        }
     }
 
 }

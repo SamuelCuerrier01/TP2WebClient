@@ -2,10 +2,11 @@ import { useNavigate } from "react-router-dom";
 import EvenementController from "../evenements/EvenementController.js";
 import {useEffect, useState} from "react";
 import AttractionController from "../attractions/AttractionController.js";
+import ErrorBar from "../ErrorBar.jsx";
 
 function EvenementCreate() {
-
     const [attractions, setAttractions] = useState([]);
+    const [error, setError] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -25,12 +26,18 @@ function EvenementCreate() {
             await EvenementController.createEvenement(concentratedData);
             navigate("/evenements");
         } catch (err) {
-            console.error(err);
+            if (err.errors) {
+                setError(Object.values(err.errors).flat());
+            } else {
+                setError(["Erreur serveur ou réseau"]);
+            }
         }
     };
 
     return (
         <div className="div-infos">
+            <ErrorBar error={error} />
+
             <h2 style={{ margin: "0 0 1rem" }}>Créer un événement</h2>
             <form onSubmit={handleCreate} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
 
