@@ -28,6 +28,18 @@ function AttractionEdit() {
                 alert("aucun champs ne dois être vide ou rempli d'espaces");
                 return;
             }
+            if (key == 'nom' && value.length > 255){
+                alert("le nom ne doit pas dépasser 255 charactères");
+                return;
+            }
+            if (key == 'adresse' && value.length > 500){
+                alert("l'adresse est trop longue");
+                return;
+            }
+            if (key == 'capacite' && isNaN(parseInt(value.toString()))){
+                alert("la capacité doit être un nombre");
+                return;
+            }
         }
         try {
             await AttractionController.editAttraction(concentratedData);

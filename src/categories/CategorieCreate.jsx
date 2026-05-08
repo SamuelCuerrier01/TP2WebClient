@@ -14,6 +14,10 @@ function CategorieCreate() {
                 alert("aucun champs ne dois être vide ou rempli d'espaces");
                 return;
             }
+            if (key == 'nom' && value.length < 3 || value.length > 50){
+                alert("le nom doit être compris entre 3 et 50 charactères");
+                return;
+            }
         }
         try {
             await CategorieController.createCategorie(concentratedData);

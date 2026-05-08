@@ -33,6 +33,13 @@ function TicketEdit() {
                 alert("aucun champs ne dois être vide ou rempli d'espaces");
                 return;
             }
+            if (key == 'date_achat'){
+                const date = new Date(value.toString());
+                if(date > new Date()){
+                    alert("La date ne peux pas être dans le futur");
+                    return
+                }
+            }
         }
         try {
             await TicketController.editTicket(concentratedData);
