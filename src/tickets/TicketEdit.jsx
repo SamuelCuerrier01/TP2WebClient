@@ -24,12 +24,24 @@ function TicketEdit() {
     const navigate = useNavigate();
     const location = useLocation();
     const ticket = location.state?.ticket;
-    console.log(ticket);
     const handleEdit = async (event) => {
         event.preventDefault();
 
         const formData = new FormData(event.currentTarget);
         const concentratedData = Object.fromEntries(formData.entries());
+        for (const [key, value] of formData.entries()) {
+            if (!key || value.trim().length === 0){
+                alert("aucun champs ne dois être vide ou rempli d'espaces");
+                return;
+            }
+            if (key == 'date_achat'){
+                const date = new Date(value.toString());
+                if(date > new Date()){
+                    alert("La date ne peux pas être dans le futur");
+                    return
+                }
+            }
+        }
         try {
             await TicketController.editTicket(concentratedData);
             navigate("/tickets");

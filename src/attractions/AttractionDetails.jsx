@@ -30,7 +30,6 @@ function AttractionDetails() {
     if (!attraction || Object.keys(attraction).length === 0) {
         return <div>Chargement des détails...</div>;
     }
-    console.log(attraction)
 
     return (
         <div className="div-infos">

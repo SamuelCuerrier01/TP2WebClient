@@ -21,6 +21,27 @@ function VisiteurCreate() {
 
         const formData = new FormData(event.currentTarget);
         const concentratedData = Object.fromEntries(formData.entries());
+        for (const [key, value] of formData.entries()) {
+            if (!key || value.trim().length === 0){
+                alert("aucun champs ne dois être vide ou rempli d'espaces");
+                return;
+            }
+            if (key == 'nom' && value.length > 255){
+                alert("le nom ne doit pas dépasser 255 charactères");
+                return;
+            }
+            if (key == 'email' && (value.length > 255 || !value.includes('@')|| !value.includes('.'))){
+                alert("le email ne doit pas dépasser 255 charactères et doit contenir un @ ainsi qu'un point");
+                return;
+            }
+            if (key == 'date_derniere_visite'){
+                const date = new Date(value.toString());
+                if(date > new Date()){
+                    alert("La date ne peux pas être dans le futur");
+                    return
+                }
+            }
+        }
         try {
             await VisiteurController.createVisiteur(concentratedData);
             navigate("/visiteurs");
@@ -32,7 +53,6 @@ function VisiteurCreate() {
             }
         }
     };
-    console.log(attractions);
 
     return (
         <div className="div-infos">
@@ -40,8 +60,6 @@ function VisiteurCreate() {
 
             <h2 style={{ margin: "0 0 1rem" }}>Créer un visiteur</h2>
             <form onSubmit={handleCreate} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-
-                <input type="hidden" name="id" />
 
                 <div className="form-group">
                     <label htmlFor="nom">Nom</label>

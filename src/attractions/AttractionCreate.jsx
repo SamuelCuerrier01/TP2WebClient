@@ -22,6 +22,24 @@ function AttractionCreate() {
 
         const formData = new FormData(event.currentTarget);
         const concentratedData = Object.fromEntries(formData.entries());
+        for (const [key, value] of formData.entries()) {
+            if (!key || value.trim().length === 0){
+                alert("aucun champs ne dois être vide ou rempli d'espaces");
+                return;
+            }
+            if (key == 'nom' && value.length > 255){
+                alert("le nom ne doit pas dépasser 255 charactères");
+                return;
+            }
+            if (key == 'adresse' && value.length > 500){
+                alert("l'adresse est trop longue");
+                return;
+            }
+            if (key == 'capacite' && isNaN(parseInt(value.toString()))){
+                alert("la capacité doit être un nombre");
+                return;
+            }
+        }
         try {
             await AttractionController.createAttraction(concentratedData);
             navigate("/attractions");

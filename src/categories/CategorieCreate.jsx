@@ -12,6 +12,16 @@ function CategorieCreate() {
 
         const formData = new FormData(event.currentTarget);
         const concentratedData = Object.fromEntries(formData.entries());
+        for (const [key, value] of formData.entries()) {
+            if (!key || value.trim().length === 0){
+                alert("aucun champs ne dois être vide ou rempli d'espaces");
+                return;
+            }
+            if (key == 'nom' && value.length < 3 || value.length > 50){
+                alert("le nom doit être compris entre 3 et 50 charactères");
+                return;
+            }
+        }
         try {
             await CategorieController.createCategorie(concentratedData);
             navigate("/categories");

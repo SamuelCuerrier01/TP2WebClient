@@ -24,6 +24,27 @@ function VisiteurEdit() {
 
         const formData = new FormData(event.currentTarget);
         const concentratedData = Object.fromEntries(formData.entries());
+        for (const [key, value] of formData.entries()) {
+            if (!key || value.trim().length === 0){
+                alert("aucun champs ne dois être vide ou rempli d'espaces");
+                return;
+            }
+            if (key == 'nom' && value.length > 255){
+                alert("le nom ne doit pas dépasser 255 charactères");
+                return;
+            }
+            if (key == 'email' && (value.length > 255 || !value.includes('@')|| !value.includes('.'))){
+                alert("le email ne doit pas dépasser 255 charactères et doit contenir un @ ainsi qu'un point");
+                return;
+            }
+            if (key == 'date_derniere_visite'){
+                const date = new Date(value.toString());
+                if(date > new Date()){
+                    alert("La date ne peux pas être dans le futur");
+                    return
+                }
+            }
+        }
         try {
             await VisiteurController.editVisiteur(concentratedData);
             navigate("/visiteurs");

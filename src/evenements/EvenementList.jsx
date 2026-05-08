@@ -15,7 +15,6 @@ function EvenementList() {
         const json = await EvenementController.getEvenementsByPage(url);
         setEvenements(Array.isArray(json.data) ? json.data : []);
         setData(json);
-        console.log(json)
     }
 
     useEffect(() => {
