@@ -1,9 +1,12 @@
 import { Outlet, Link } from "react-router-dom";
+import { useState } from "react";
 
 function Layout() {
+    const [menuOpen, setMenuOpen] = useState(false);
+
     return (
         <div className="app-container">
-            <aside className="sidebar">
+            <aside className={`sidebar ${menuOpen ? "sidebar-open" : ""}`}>
                 <div className="sidebar-logo">
                     <div className="sidebar-logo-icon">P</div>
                     <div className="sidebar-logo-text">
@@ -12,15 +15,18 @@ function Layout() {
                     </div>
                 </div>
                 <div className="sidebar-section">Menu</div>
-                <Link to="/attractions" className="nav-item"><div className="nav-dot"></div>Attractions</Link>
-                <Link to="/visiteurs" className="nav-item"><div className="nav-dot"></div>Visiteurs</Link>
-                <Link to="/categories" className="nav-item"><div className="nav-dot"></div>Catégories</Link>
-                <Link to="/evenements" className="nav-item"><div className="nav-dot"></div>Événements</Link>
-                <Link to="/tickets" className="nav-item"><div className="nav-dot"></div>Tickets</Link>
+                <Link to="/attractions" className="nav-item" onClick={() => setMenuOpen(false)}><div className="nav-dot"></div>Attractions</Link>
+                <Link to="/visiteurs" className="nav-item" onClick={() => setMenuOpen(false)}><div className="nav-dot"></div>Visiteurs</Link>
+                <Link to="/categories" className="nav-item" onClick={() => setMenuOpen(false)}><div className="nav-dot"></div>Catégories</Link>
+                <Link to="/evenements" className="nav-item" onClick={() => setMenuOpen(false)}><div className="nav-dot"></div>Événements</Link>
+                <Link to="/tickets" className="nav-item" onClick={() => setMenuOpen(false)}><div className="nav-dot"></div>Tickets</Link>
             </aside>
+
+            {menuOpen && <div className="overlay" onClick={() => setMenuOpen(false)}></div>}
 
             <div className="main-wrapper">
                 <header className="main-header">
+                    <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>☰</button>
                     <span className="main-header-title">Parc d'Attractions</span>
                 </header>
                 <main className="content">
